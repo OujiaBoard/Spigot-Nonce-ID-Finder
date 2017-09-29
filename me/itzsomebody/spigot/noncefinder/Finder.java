@@ -118,12 +118,6 @@ public class Finder extends JFrame {
                             t.printStackTrace();
                         }
                         finally {
-                            SwingUtilities.invokeLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    finder.field.setText("");
-                                }
-                            });
                             Finder.nonceID = null;
                             Finder.possiblenonces.clear();
                         }
@@ -177,19 +171,22 @@ public class Finder extends JFrame {
     	for (MethodNode methodNode : classNode.methods) {
     		Iterator<AbstractInsnNode> insnIterator = methodNode.instructions.iterator();
 	        while (insnIterator.hasNext()) {
-	          AbstractInsnNode insnNode = (AbstractInsnNode)insnIterator.next();
+	          AbstractInsnNode insnNode = insnIterator.next();
 	          String str;
 	          if ((insnNode.getType() == 9)) {
-	        	str = ((LdcInsnNode)insnNode).cst.toString();
-	            Matcher matcher = NONCEID_PATTERN.matcher(str);
-	            if (matcher.find()) {
-	              possiblenonces.add(str);
-	              nonceID = "Whoo";
-	              return true;
-	            }
+	        	Object cst = ((LdcInsnNode)insnNode).cst;
+	        	if (cst instanceof String) {
+	        		str = ((LdcInsnNode)insnNode).cst.toString();
+	        		Matcher matcher = NONCEID_PATTERN.matcher(str);
+	        		if (matcher.find()) {
+	        			possiblenonces.add(str);
+	        			nonceID = "Whoo";
+	        			return true;
+	        		}
+	        	}
 	          }
-	        }
-    	}
+	       }
+	    }
         return false;
     }
 }
