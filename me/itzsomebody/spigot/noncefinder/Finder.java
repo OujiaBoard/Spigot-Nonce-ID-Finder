@@ -21,8 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -103,14 +101,9 @@ public class Finder extends JFrame {
                             }
                             process(input);
                             if (Finder.nonceID == null) {
-                                JOptionPane.showMessageDialog(null, "Could not find any nonces.", "Done", 1);
+                                JOptionPane.showMessageDialog(null, "Could not find any nonces.", "Done", -1);
                             } else {
-                            	JTextArea textArea = new JTextArea(12, 45);
-                            	textArea.setText("Nonces found: " + JOptionStringBuilder());
-                            	textArea.setLineWrap(false);
-                                textArea.setEditable(false);
-                            	JScrollPane scrollPane = new JScrollPane(textArea);  
-                            	JOptionPane.showMessageDialog(null, scrollPane, "Done", 1);
+                            	JOptionPane.showMessageDialog(null, "Nonces found: " + JOptionStringBuilder(), "Done", -1);
                             }
                         }
                         catch (Throwable t) {
