@@ -103,7 +103,11 @@ public class Finder extends JFrame {
                             if (Finder.nonceID == null) {
                                 JOptionPane.showMessageDialog(null, "Could not find any nonces.", "Done", -1);
                             } else {
-                            	JOptionPane.showMessageDialog(null, "Nonces found: " + JOptionStringBuilder(), "Done", -1);
+                            	if (possiblenonces.size() == 1) {
+                            		JOptionPane.showMessageDialog(null, "Found " + possiblenonces.size() + " possible nonce." + JOptionStringBuilder(), "Done", -1);
+                            	} else {
+                            		JOptionPane.showMessageDialog(null, "Found " + possiblenonces.size() + " possible nonces." + JOptionStringBuilder(), "Done", -1);
+                            	}
                             }
                         }
                         catch (Throwable t) {
